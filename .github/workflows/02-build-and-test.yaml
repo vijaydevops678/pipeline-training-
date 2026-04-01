@@ -22,7 +22,7 @@ jobs:
         # Step 1: CHECKOUT - Get your code onto the runner
         # Without this step, the runner machine is EMPTY - no code!
         - name: Checkout code
-          uses:actions/checkout@v4
+          uses: actions/checkout@v4
           # After this step, all your files (app.js, package.json, etc.)
           # are available on the runner machine
 
