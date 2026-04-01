@@ -1,0 +1,73 @@
+# =============================================================
+# PIPELINE 01: Hello World
+# This is your very first pipeline!
+# It just prints messages - nothing complex
+# =============================================================
+
+name: 01 - Hello World Pipeline
+
+# WHEN should this pipeline run?
+on:
+  # Run when someone pushes to main branch
+  push:
+    branches:
+      - main
+
+  # Also allow manual trigger (button in GitHub UI)
+  workflow_dispatch:
+
+# WHAT should this pipeline do?
+jobs:
+  # Job 1: Say hello
+  say-hello:
+    # WHERE should this job run? On an Ubuntu Linux machine
+    runs-on: ubuntu-latest
+
+    # STEPS: The actual commands to run (in order)
+    steps:
+      # Step 1: Just print a greeting
+      - name: Say Hello
+        run: echo "Hello! This is my first GitHub Actions pipeline!"
+
+      # Step 2: Print the date and time
+      - name: Print Date
+        run: date
+
+      # Step 3: Print information about the runner machine
+      - name: Print Runner Info
+        run: |
+          echo "Operating System:"
+          uname -a
+          echo ""
+          echo "Current User:"
+          whoami
+          echo ""
+          echo "Current Directory:"
+          pwd
+          echo ""
+          echo "Disk Space:"
+          df -h /
+          echo ""
+          echo "Memory:"
+          free -h
+
+      # Step 4: Print information about the GitHub event
+      - name: Print GitHub Context
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Commit SHA: $GITHUB_SHA"
+          echo "Run Number: $GITHUB_RUN_NUMBER"
+          echo "Actor (who triggered): $GITHUB_ACTOR"
+          echo "Event Name: $GITHUB_EVENT_NAME"
+          echo "Workspace: $GITHUB_WORKSPACE"
+
+      # Step 5: Create a file and show it
+      - name: Create and Show a File
+        run: |
+          echo "This file was created by pipeline run #$GITHUB_RUN_NUMBER" > hello.txt
+          echo "Created at: $(date)" >> hello.txt
+          echo "By: $GITHUB_ACTOR" >> hello.txt
+          echo ""
+          echo "=== Contents of hello.txt ==="
+          cat hello.txt
