@@ -1,0 +1,12 @@
+{
+  "name": "pipeline-training-app",
+  "version": "1.0.0",
+  "description": "Learning GitHub Actions pipelines",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node test.js"
+  },
+  "author": "Pipeline Training",
+  "license": "MIT"
+}
